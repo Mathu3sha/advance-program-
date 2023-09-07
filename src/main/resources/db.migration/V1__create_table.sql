@@ -1,0 +1,7 @@
+-- create table appointment(
+--     id long,
+--     date Date,
+--     time varchar(100),
+--     jobseekername varchar(100),
+--     consultatntname varchar(100)
+-- )

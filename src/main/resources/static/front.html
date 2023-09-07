@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment Management</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<h1>Appointment Management System</h1>
+
+<h2>Create Appointment</h2>
+<form id="createAppointmentForm">
+    <label for="appointmentDate">Date:</label>
+    <input type="date" id="appointmentDate" required>
+    <label for="appointmentTime">Time:</label>
+    <input type="text" id="appointmentTime" required>
+    <label for="jobSeekerName">Job Seeker Name:</label>
+    <input type="text" id="jobSeekerName" required>
+    <label for="consultantName">Consultant Name:</label>
+    <input type="text" id="consultantName" required>
+    <button type="submit">Create Appointment</button>
+</form>
+
+<h2>Appointments</h2>
+<table>
+    <tbody id="appointmentsList"></tbody>
+</table>
+
+<button><a href="http://localhost:8090/index.html">Back</a> </button>
+
+<script src="script.js"></script>
+<script>
+    // Parse query parameters
+    const queryParams = new URLSearchParams(window.location.search);
+    const appointmentId = queryParams.get('id');
+    const appointmentDate = queryParams.get('date');
+    const appointmentTime = queryParams.get('time');
+    const jobSeekerName = queryParams.get('jobSeekerName');
+    const consultantName = queryParams.get('consultantName');
+
+    // Populate form fields with the appointment data
+    document.getElementById('appointmentDate').value = appointmentDate;
+    document.getElementById('appointmentTime').value = appointmentTime;
+    document.getElementById('jobSeekerName').value = jobSeekerName;
+    document.getElementById('consultantName').value = consultantName;
+
+    function handleEdit(event) {
+        const appointmentId = event.target.getAttribute('data-id');
+
+        // Fetch the specific appointment data by ID
+        fetch(`/appointments/get/${appointmentId}`)
+            .then(response => response.json())
+            .then(appointment => {
+                // Convert the appointment data to a query string
+                const queryString = `?id=${appointment.id}&date=${appointment.date}&time=${appointment.time}&jobSeekerName=${encodeURIComponent(appointment.jobSeekerName)}&consultantName=${encodeURIComponent(appointment.consultantName)}`;
+
+                // Redirect to front.html with the query string
+                window.location.href = `/front.html${queryString}`;
+            });
+    }
+</script>
+</body>
+</html>

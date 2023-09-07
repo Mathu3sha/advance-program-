@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!-- Similar structure as your create appointment form -->
+<h2>Edit Appointment</h2>
+<form id="editAppointmentForm">
+    <input type="hidden" id="editAppointmentId">
+    <label for="editAppointmentDate">Date:</label>
+    <input type="date" id="editAppointmentDate" required>
+    <label for="editAppointmentTime">Time:</label>
+    <input type="text" id="editAppointmentTime" required>
+    <label for="editJobSeekerName">Job Seeker Name:</label>
+    <input type="text" id="editJobSeekerName" required>
+    <label for="editConsultantName">Consultant Name:</label>
+    <input type="text" id="editConsultantName" required>
+    <button type="submit">Save Changes</button>
+</form>
+
+<script src="edit-script.js"></script>
+
+</body>
+</html>
